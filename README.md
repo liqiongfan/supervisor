@@ -3,12 +3,19 @@ Golang http &amp; grpc server for gracefully shutdown like nginx -s reload
 if you want a server which would be restart without stop service, you shall choise supervisor
 
 # reload
-Server's Config shows you the http port which your services shall listen, if you provide `:8088` as you default port
+Server's Config shows you the http port which your services shall listen, if you provide `:8088` as the default port
 then you can request the url: 
 ```
 curl http://your_ip:8088/-/reload
 ```
 to restart the server
+
+# metrics
+Server's Config also shows the metrics for prometheus, if you provide the Config with `:8088` as the default port
+then you can access the metrics of your services:
+```shell
+curl http://your_ip:8088/-/metrics
+```
 
 # demo
 
