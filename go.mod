@@ -1,4 +1,4 @@
-module supervisor
+module github.com/liqiongfan/supervisor
 
 go 1.16
 
