@@ -1,6 +1,14 @@
 # supervisor
-Golang http&amp;grpc server for gracefully shutdown like nginx -s reload
+Golang http &amp; grpc server for gracefully shutdown like nginx -s reload
 if you want a server which would be restart without stop service, you shall choise supervisor
+
+# reload
+Server's Config shows you the http port which your services shall listen, if you provide `:8088` as you default port
+then you can request the url: 
+```
+curl http://your_ip:8088/-/reload
+```
+to restart the server
 
 # demo
 
