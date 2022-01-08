@@ -66,3 +66,61 @@ func Main(srv []*http.Server, l []net.Listener) {
 
 
 ```
+
+
+GRPC server
+
+```golang
+package main
+
+import (
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"github.com/liqiongfan/supervisor"
+	"net"
+	"net/http"
+)
+
+
+func main() {
+
+	h := &supervisor.HTTPServer{
+		Server: supervisor.Server{
+			ListenAddr: []string{`:9091`},
+			Config: supervisor.ListenConfig{ Addr: ":8088" },
+		},
+		Entry: Main,
+	}
+
+	err := h.Run()
+	if err != nil {
+		panic(err)
+	}
+}
+
+
+func all(c *gin.Context) {
+	uri, _ := c.Params.Get(`uri`)
+	c.String(200, "uri: %s", uri)
+}
+
+
+func Main(srv []*http.Server, l []net.Listener) {
+
+	server := srv[0]
+	listener := l[0]
+
+	r := gin.New()
+	r.GET(`/*uri`, all)
+
+	server.Handler = r
+	err := server.Serve(listener)
+	if err != nil {
+		fmt.Printf("Server: %v\n", err)
+	}
+
+
+
+}
+
+```
