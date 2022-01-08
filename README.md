@@ -68,7 +68,7 @@ func Main(srv []*http.Server, l []net.Listener) {
 ```
 
 
-GRPC server
+gin HTTP server
 
 ```golang
 package main
